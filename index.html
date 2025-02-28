@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>내 소개 페이지</title>
+  <!-- 반응형 웹을 위한 meta 태그 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 예시 폰트(Inter) 로드(선택 사항) -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"> -->
+
+  <style>
+    /* ------------------------------------
+       1) 전체 기본 스타일 (다크 테마 배경)
+    ------------------------------------ */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #090909;
+      font-family: 'Inter', sans-serif; /* 'Lufga' 등 원하는 폰트로 변경 가능 */
+      color: #ffffff;
+    }
+
+    /* 공통 컨테이너용: 가운데 정렬 시 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ------------------------------------
+       2) 헤더영역 예시
+    ------------------------------------ */
+    header {
+      background: black;
+      border: 1px solid #BF0930;
+      border-radius: 40px;
+      margin: 24px;
+      padding: 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      color: #E11D48;  /* 붉은 기조 */
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin: 0;
+      text-transform: uppercase; /* 대문자로 강조 */
+    }
+
+    /* ------------------------------------
+       3) 본문 내부: 하얀 박스를 띄우는 Hero 섹션
+    ------------------------------------ */
+    .hero {
+      /* 흰색 반투명 박스를 띄우는 느낌으로 */
+      width: 100%;
+      max-width: 1440px;
+      margin: 40px auto;
+      position: relative;
+      background: #fff; 
+      border-radius: 24px;
+      min-height: 1024px;  /* 질문 예시에 맞춰 높이 설정 */
+      /* 반투명/블러 효과를 주고 싶다면 예: 
+         background: rgba(255, 255, 255, 0.1);
+         backdrop-filter: blur(10px); 
+         border: 1px solid rgba(255, 255, 255, 0.2);
+       */
+      box-shadow: 0 0 40px rgba(225, 29, 72, 0.2); /* 예시로 약간 그림자 */
+      overflow: hidden; /* 절대배치 요소가 박스 밖으로 나가지 않도록 */
+    }
+
+    /* hero 내부에 절대 배치될 때 편의상 position: relative */
+    .hero-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ------------------------------------
+       4) 절대배치된 요소들에 대한 스타일
+          (질문에 주어진 inline style을 클래스화)
+    ------------------------------------ */
+    /* 4-1) 큰 문구: "Hi, I’m Sachina..." */
+    .intro-text {
+      position: absolute;
+      width: 606px;
+      height: 195px;
+      left: 67px;
+      top: 383px;
+      text-align: center;
+      line-height: 77px;
+      word-wrap: break-word;
+    }
+    .intro-text .blue {
+      color: #018DB0; 
+      font-size: 67px;
+      font-weight: 700;
+      display: inline-block;
+    }
+    .intro-text .orange {
+      color: #D1884F;
+      font-size: 67px;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    /* 4-2) 반투명 파란 박스(배경 장식) */
+    .blue-bg-deco {
+      position: absolute;
+      width: 438.75px;
+      height: 464.9px;
+      left: 825px;
+      top: 326px;
+      transform: rotate(-1.57deg);
+      transform-origin: 0 0;
+      background: rgba(43, 182, 217, 0.36);
+      border-top-left-radius: 224px;
+      /* 아래처럼 시각 효과 살려도 좋습니다.
+         box-shadow: 0 0 30px rgba(43, 182, 217, 0.3); */
+    }
+
+    /* 4-3) 프로필 이미지 */
+    .hero-img {
+      position: absolute;
+      width: 464px;
+      height: 489px;
+      left: 852px;
+      top: 292px;
+      border-top-left-radius: 224px;
+      object-fit: cover;
+    }
+
+    /* 4-4) 소개글 박스 */
+    .hero-desc {
+      position: absolute;
+      width: 632px;
+      left: 127px;
+      top: 600px;
+      font-size: 24px;
+      font-weight: 500;
+      color: #000;  /* 하얀 박스 위라서 검정으로 설정 */
+      line-height: 1.4;
+    }
+    .hero-desc .blue-text {
+      color: #008AAA;
+      font-size: 24px;
+      font-weight: 400;
+      margin-left: 8px;
+    }
+
+    /* 4-5) 버튼들 */
+    .hero-btn-primary,
+    .hero-btn-secondary {
+      position: absolute;
+      padding: 8px 35px;
+      font-size: 32px;
+      font-weight: 400;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0px 4px 6px rgba(0, 138, 170, 0.17);
+      text-decoration: none;
+    }
+
+    /* Hire me! 버튼 (파란색) */
+    .hero-btn-primary {
+      left: 123px;
+      top: 783px;
+      background: #008AAA;
+      color: #fff;
+      box-shadow: 0px 10px 6px rgba(0, 138, 170, 0.23);
+      border: 2px solid transparent;
+    }
+    .hero-btn-primary:hover {
+      background: #00738a;
+      box-shadow: 0 12px 12px rgba(0, 115, 138, 0.3);
+    }
+
+    /* See My Project 버튼 (하양 바탕 + 파란색 테두리) */
+    .hero-btn-secondary {
+      left: 363px;
+      top: 783px;
+      background: #fff;
+      color: #008AAA;
+      border: 2px solid #008AAA;
+    }
+    .hero-btn-secondary:hover {
+      background: rgba(0, 138, 170, 0.05);
+      box-shadow: 0 12px 12px rgba(0, 138, 170, 0.2);
+    }
+
+    /* 4-6) 메뉴 텍스트들 (About Me, Contact Me, ...), 심볼들 */
+    .menu-item {
+      position: absolute;
+      font-size: 24px;
+      font-weight: 400;
+      color: #000; /* 하얀 박스 내부이므로 검정 */
+      text-align: center;
+    }
+    .home {
+      left: 808px;
+      top: 85px;
+      color: #D1884F; /* Home만 강조 색 */
+    }
+    .about {
+      left: 974px;
+      top: 86px;
+    }
+    .contact {
+      left: 1183px;
+      top: 87px;
+    }
+    .logo1 {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      left: 925px;
+      top: 79px;
+    }
+    .logo2 {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      left: 1135px;
+      top: 82px;
+    }
+    /* 작은 컬러 박스 */
+    .small-box {
+      position: absolute;
+      width: 35px;
+      height: 30px;
+      left: 755px;
+      top: 79px;
+      background: #D1884F;
+    }
+
+    /* 4-7) 왼쪽 상단의 장식 이미지 */
+    .deco-img-left {
+      position: absolute;
+      width: 377px;
+      height: 426px;
+      left: -12px;
+      top: -96px;
+      object-fit: cover;
+    }
+
+    /* 4-8) "Welcome to my site" 텍스트 */
+    .welcome-text {
+      position: absolute;
+      width: 606px;
+      height: 119px;
+      left: -33px;
+      top: 255px;
+      text-align: center;
+      color: #3BBADB;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 90px;
+      word-wrap: break-word;
+    }
+
+    /* ------------------------------------
+       6) 푸터 예시
+    ------------------------------------ */
+    footer {
+      text-align: center;
+      color: #ffffff;
+      padding: 20px 0;
+      margin-top: 40px;
+      font-size: 0.875rem;
+      position: relative;
+    }
+
+    /* 반응형 예시 (간단히) */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .hero {
+        min-height: auto;
+        margin: 20px;
+      }
+      .intro-text {
+        width: 90%;
+        left: 5%;
+        top: 250px; 
+        font-size: 1.4rem;
+        line-height: 1.2;
+      }
+      .intro-text .blue,
+      .intro-text .orange {
+        font-size: 2rem;
+      }
+      .hero-img {
+        width: 300px;
+        height: 320px;
+        left: 50%;
+        top: 400px;
+        transform: translateX(-50%);
+      }
+      /* 필요 시 다른 요소도 모바일 최적화 */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 영역 (원하시면 수정/삭제 가능) -->
+  <header>
+    <h1>My Portfolio</h1>
+  </header>
+
+  <!-- 화이트 박스 hero 영역 -->
+  <section class="hero">
+    <div class="hero-content">
+      <!-- 왼쪽 상단 장식 이미지 -->
+      <img class="deco-img-left" src="https://via.placeholder.com/377x426" alt="장식이미지" />
+
+      <!-- 환영 문구 -->
+      <div class="welcome-text">
+        Welcome to my site
+      </div>
+
+      <!-- 메뉴(상단) -->
+      <div class="menu-item home">Home</div>
+      <div class="menu-item about">About Me</div>
+      <div class="menu-item contact">Contact Me</div>
+      <!-- 작은 컬러 박스 & 아이콘들(로고) -->
+      <div class="small-box"></div>
+      <img class="logo1" src="https://via.placeholder.com/35x35" alt="logo" />
+      <img class="logo2" src="https://via.placeholder.com/35x35" alt="logo" />
+
+      <!-- 메인 문구 -->
+      <div class="intro-text">
+        <span class="blue">나는<br/>전한결</span>
+        <span class="orange">상품연구팀</span>
+      </div>
+
+      <!-- 반투명 파란 데코 박스 2개 (겹치는 것으로 보이므로 2개 배치) -->
+      <div class="blue-bg-deco"></div>
+      <div class="blue-bg-deco" style="opacity: 0.7;"></div>
+
+      <!-- 프로필 이미지 -->
+      <img class="hero-img" src="https://via.placeholder.com/464x489" alt="프로필이미지" />
+
+      <!-- 간략 소개문구 -->
+      <div class="hero-desc">
+        I am a focused and talented B.Sc.CSIT student currently pursuing my bachelor degree
+        from Asian School of Management and Technology.
+        <span class="blue-text">See More..</span>
+      </div>
+
+      <!-- 버튼들 -->
+      <a href="#" class="hero-btn-primary">Hire me !</a>
+      <a href="#" class="hero-btn-secondary">See My Project</a>
+    </div>
+  </section>
+
+  <!-- 푸터 영역 -->
+  <footer>
+    Copyright © 2025. All rights reserved.
+  </footer>
+</body>
+</html>
